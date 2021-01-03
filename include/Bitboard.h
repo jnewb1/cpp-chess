@@ -40,9 +40,35 @@ private:
 
     static const int BB_BACKRANKS = BB_RANK_1 | BB_RANK_8;
 
-    std::vector<BB_KNIGHT_ATTACKS> = [_step_attacks(sq, [17, 15, 10, 6, -17, -15, -10, -6]) for sq in SQUARES]
-    std::vector<BB_KING_ATTACKS> = [_step_attacks(sq, [9, 8, 7, 1, -9, -8, -7, -1]) for sq in SQUARES]
-    std::vector<BB_PAWN_ATTACKS> = [[_step_attacks(sq, deltas) for sq in SQUARES] for deltas in [[-7, -9], [7, 9]]]
+    static const std::vector<int> KNIGHT_DELTAS = {17, 15, 10, 6, -17, -15, -10, -6};
+    static const std::vector<int> KING_DELTAS = {9, 8, 7, 1, -9, -8, -7, -1};
+    static const std::vector<int> PAWN_DELTAS_1 = {-7, -9};
+    static const std::vector<int> PAWN_DELTAS_2 = {7, 9};
+
+    static std::vector<BitBoard> build_attacks(std::vector<int> deltas)
+    {
+        std::vector<Bitboard> ret;
+
+        for (auto sq : SQUARES)
+        {
+             ret.push_back(_step_attacks(sq, deltas);
+        }
+
+        return ret;
+    }
+
+    static std::vector<Bitboard> BB_KNIGHT_ATTACKS()
+    {
+        return Bitboard.build_attacks(KNIGHT_DELTAS);
+    }
+    static std::vector<Bitboard> BB_KING_ATTACKS()
+    {
+        return Bitboard.build_attacks(KING_DELTAS);
+    }
+    static std::vector<Bitboard> BB_PAWN_ATTACKS()
+    {
+        return Bitboard.build_attacks(PAWN_DELTAS);
+    }
 
 public:
     Bitboard(const int bitboard_ = 0) : bitboard(bitboard_)
