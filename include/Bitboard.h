@@ -37,6 +37,19 @@ private:
     static Bitboard _sliding_attacks(Square square, Bitboard occupied, std::vector<int64_t> deltas);
     static Bitboard _step_attacks(Square square, std::vector<int64_t> deltas);
 
+    static std::vector<Bitboard> build_attacks(std::vector<int64_t> deltas)
+    {
+        std::vector<Bitboard> ret;
+
+        for (auto sq : SQUARES)
+        {
+            ret.push_back(_step_attacks(sq, deltas));
+        }
+
+        return ret;
+    }
+
+public:
     static const Bitboard BB_ALL = 0xffffffffffffffff;
     static const Bitboard BB_EMPTY = 0x0;
 
@@ -85,19 +98,8 @@ private:
     static std::vector<Bitboard> BB_KING_ATTACKS;
     static std::vector<Bitboard> BB_PAWN_ATTACKS;
 
-    static std::vector<Bitboard> build_attacks(std::vector<int64_t> deltas)
-    {
-        std::vector<Bitboard> ret;
+    static std::vector<std::vector<Bitboard>> BB_RAYS;
 
-        for (auto sq : SQUARES)
-        {
-            ret.push_back(_step_attacks(sq, deltas));
-        }
-
-        return ret;
-    }
-
-public:
     BitboardTools()
     {
         BB_KNIGHT_ATTACKS = build_attacks(KNIGHT_DELTAS);
@@ -120,6 +122,8 @@ public:
         auto rank_attack_table = _attack_table({-1, 1});
         BB_RANK_MASKS = std::get<0>(rank_attack_table);
         BB_RANK_ATTACKS = std::get<1>(rank_attack_table);
+
+        BB_RAYS = _rays();
     }
     static Bitboard flip_vertical(Bitboard bb);
 
@@ -268,6 +272,17 @@ public:
             rays.push_back(rays_row);
         }
         return rays;
+    }
+
+    Bitboard ray(Square a, Square b)
+    {
+        return BB_RAYS[a][b];
+    }
+
+    Bitboard between(Square a, Square b)
+    {
+        Bitboard bb = BB_RAYS[a][b] & ((BB_ALL << a) ^ (BB_ALL << b));
+        return bb & (bb - 1);
     }
 };
 
