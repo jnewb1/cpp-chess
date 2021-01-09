@@ -31,13 +31,12 @@ int bit_width(T x)
     return std::numeric_limits<T>::digits - countl_zero(x);
 }
 
-class BitboardTools
+namespace BitboardTools
 {
-private:
-    static Bitboard _sliding_attacks(Square square, Bitboard occupied, std::vector<int64_t> deltas);
-    static Bitboard _step_attacks(Square square, std::vector<int64_t> deltas);
+    Bitboard _sliding_attacks(Square square, Bitboard occupied, std::vector<int64_t> deltas);
+    Bitboard _step_attacks(Square square, std::vector<int64_t> deltas);
 
-    static std::vector<Bitboard> build_attacks(std::vector<int64_t> deltas)
+    std::vector<Bitboard> build_attacks(std::vector<int64_t> deltas)
     {
         std::vector<Bitboard> ret;
 
@@ -49,102 +48,76 @@ private:
         return ret;
     }
 
-public:
-    static const Bitboard BB_ALL = 0xffffffffffffffff;
-    static const Bitboard BB_EMPTY = 0x0;
+    const Bitboard BB_ALL = 0xffffffffffffffff;
+    const Bitboard BB_EMPTY = 0x0;
 
-    static const Bitboard BB_LIGHT_SQUARES = 0x55aa55aa55aa55aa;
-    static const Bitboard BB_DARK_SQUARES = 0xaa55aa55aa55aa55;
+    const Bitboard BB_LIGHT_SQUARES = 0x55aa55aa55aa55aa;
+    const Bitboard BB_DARK_SQUARES = 0xaa55aa55aa55aa55;
 
-    static const Bitboard BB_CORNERS = BB_A1 | BB_H1 | BB_A8 | BB_H8;
-    static const Bitboard BB_CENTER = BB_D4 | BB_E4 | BB_D5 | BB_E5;
+    const Bitboard BB_CORNERS = BB_A1 | BB_H1 | BB_A8 | BB_H8;
+    const Bitboard BB_CENTER = BB_D4 | BB_E4 | BB_D5 | BB_E5;
 
-    static const Bitboard BB_FILE_A = (uint64_t)0x0101010101010101 << 0;
-    static const Bitboard BB_FILE_B = (uint64_t)0x0101010101010101 << 1;
-    static const Bitboard BB_FILE_C = (uint64_t)0x0101010101010101 << 2;
-    static const Bitboard BB_FILE_D = (uint64_t)0x0101010101010101 << 3;
-    static const Bitboard BB_FILE_E = (uint64_t)0x0101010101010101 << 4;
-    static const Bitboard BB_FILE_F = (uint64_t)0x0101010101010101 << 5;
-    static const Bitboard BB_FILE_G = (uint64_t)0x0101010101010101 << 6;
-    static const Bitboard BB_FILE_H = (uint64_t)0x0101010101010101 << 7;
+    const Bitboard BB_FILE_A = (uint64_t)0x0101010101010101 << 0;
+    const Bitboard BB_FILE_B = (uint64_t)0x0101010101010101 << 1;
+    const Bitboard BB_FILE_C = (uint64_t)0x0101010101010101 << 2;
+    const Bitboard BB_FILE_D = (uint64_t)0x0101010101010101 << 3;
+    const Bitboard BB_FILE_E = (uint64_t)0x0101010101010101 << 4;
+    const Bitboard BB_FILE_F = (uint64_t)0x0101010101010101 << 5;
+    const Bitboard BB_FILE_G = (uint64_t)0x0101010101010101 << 6;
+    const Bitboard BB_FILE_H = (uint64_t)0x0101010101010101 << 7;
 
-    static const Bitboard BB_RANK_1 = (uint64_t)0xff << 0;
-    static const Bitboard BB_RANK_2 = (uint64_t)0xff << 8;
-    static const Bitboard BB_RANK_3 = (uint64_t)0xff << 16;
-    static const Bitboard BB_RANK_4 = (uint64_t)0xff << 24;
-    static const Bitboard BB_RANK_5 = (uint64_t)0xff << 32;
-    static const Bitboard BB_RANK_6 = (uint64_t)0xff << 40;
-    static const Bitboard BB_RANK_7 = (uint64_t)0xff << 48;
-    static const Bitboard BB_RANK_8 = (uint64_t)0xff << 52;
+    const Bitboard BB_RANK_1 = (uint64_t)0xff << 0;
+    const Bitboard BB_RANK_2 = (uint64_t)0xff << 8;
+    const Bitboard BB_RANK_3 = (uint64_t)0xff << 16;
+    const Bitboard BB_RANK_4 = (uint64_t)0xff << 24;
+    const Bitboard BB_RANK_5 = (uint64_t)0xff << 32;
+    const Bitboard BB_RANK_6 = (uint64_t)0xff << 40;
+    const Bitboard BB_RANK_7 = (uint64_t)0xff << 48;
+    const Bitboard BB_RANK_8 = (uint64_t)0xff << 52;
 
-    static const std::vector<Bitboard> BB_FILES;
-    static const std::vector<Bitboard> BB_RANKS;
+    const std::vector<Bitboard> BB_FILES;
+    const std::vector<Bitboard> BB_RANKS;
 
-    static const Bitboard BB_BACKRANKS = BB_RANK_1 | BB_RANK_8;
+    const Bitboard BB_BACKRANKS = BB_RANK_1 | BB_RANK_8;
 
-    static const std::vector<int64_t> KNIGHT_DELTAS;
-    static const std::vector<int64_t> KING_DELTAS;
-    static const std::vector<int64_t> PAWN_DELTAS_1;
-    static const std::vector<int64_t> PAWN_DELTAS_2;
+    const std::vector<int64_t> KNIGHT_DELTAS;
+    const std::vector<int64_t> KING_DELTAS;
+    const std::vector<int64_t> PAWN_DELTAS_1;
+    const std::vector<int64_t> PAWN_DELTAS_2;
 
-    static std::vector<Bitboard> BB_DIAG_MASKS;
-    static std::vector<std::map<Bitboard, Bitboard>> BB_DIAG_ATTACKS;
-    static std::vector<Bitboard> BB_FILE_MASKS;
-    static std::vector<std::map<Bitboard, Bitboard>> BB_FILE_ATTACKS;
-    static std::vector<Bitboard> BB_RANK_MASKS;
-    static std::vector<std::map<Bitboard, Bitboard>> BB_RANK_ATTACKS;
+    std::vector<Bitboard> BB_DIAG_MASKS;
+    std::vector<std::map<Bitboard, Bitboard>> BB_DIAG_ATTACKS;
+    std::vector<Bitboard> BB_FILE_MASKS;
+    std::vector<std::map<Bitboard, Bitboard>> BB_FILE_ATTACKS;
+    std::vector<Bitboard> BB_RANK_MASKS;
+    std::vector<std::map<Bitboard, Bitboard>> BB_RANK_ATTACKS;
 
-    static std::vector<Bitboard> BB_KNIGHT_ATTACKS;
-    static std::vector<Bitboard> BB_KING_ATTACKS;
-    static std::vector<Bitboard> BB_PAWN_ATTACKS;
+    std::vector<Bitboard> BB_KNIGHT_ATTACKS;
+    std::vector<Bitboard> BB_KING_ATTACKS;
+    std::vector<Bitboard> BB_PAWN_ATTACKS;
 
-    static std::vector<std::vector<Bitboard>> BB_RAYS;
+    std::vector<std::vector<Bitboard>> BB_RAYS;
 
-    BitboardTools()
-    {
-        BB_KNIGHT_ATTACKS = build_attacks(KNIGHT_DELTAS);
+    Bitboard flip_vertical(Bitboard bb);
 
-        BB_KING_ATTACKS = build_attacks(KING_DELTAS);
+    Bitboard flip_horizontal(Bitboard bb);
 
-        BB_PAWN_ATTACKS = build_attacks(PAWN_DELTAS_1);
+    Bitboard flip_diagonal(Bitboard bb);
 
-        std::vector<Bitboard> d = build_attacks(PAWN_DELTAS_2);
-        BB_PAWN_ATTACKS.insert(BB_PAWN_ATTACKS.end(), d.begin(), d.end());
-
-        auto diag_attack_table = _attack_table({-9, -7, 7, 9});
-        BB_DIAG_MASKS = std::get<0>(diag_attack_table);
-        BB_DIAG_ATTACKS = std::get<1>(diag_attack_table);
-
-        auto file_attack_table = _attack_table({-8, 8});
-        BB_FILE_MASKS = std::get<0>(file_attack_table);
-        BB_FILE_ATTACKS = std::get<1>(file_attack_table);
-
-        auto rank_attack_table = _attack_table({-1, 1});
-        BB_RANK_MASKS = std::get<0>(rank_attack_table);
-        BB_RANK_ATTACKS = std::get<1>(rank_attack_table);
-
-        BB_RAYS = _rays();
-    }
-    static Bitboard flip_vertical(Bitboard bb);
-
-    static Bitboard flip_horizontal(Bitboard bb);
-
-    static Bitboard flip_diagonal(Bitboard bb);
-
-    static Bitboard flip_anti_diagonal(Bitboard bb);
+    Bitboard flip_anti_diagonal(Bitboard bb);
 
     /*
      y: Vertical shift, positive = up
      x: Horizontal shift, positive = right
     */
-    static Bitboard shift(Bitboard bb, int x, int y);
+    Bitboard shift(Bitboard bb, int x, int y);
 
-    static int lsb(Bitboard bb)
+    int lsb(Bitboard bb)
     {
         return bit_width(bb & -bb) - 1;
     }
 
-    static int msb(Bitboard bb)
+    int msb(Bitboard bb)
     {
         return bit_width(bb) - 1;
     }
@@ -284,29 +257,55 @@ public:
         Bitboard bb = BB_RAYS[a][b] & ((BB_ALL << a) ^ (BB_ALL << b));
         return bb & (bb - 1);
     }
-};
 
-const std::vector<int64_t>
-    BitboardTools::KNIGHT_DELTAS = {17, 15, 10, 6, -17, -15, -10, -6};
-const std::vector<int64_t> BitboardTools::KING_DELTAS = {9, 8, 7, 1, -9, -8, -7, -1};
-const std::vector<int64_t> BitboardTools::PAWN_DELTAS_1 = {-7, -9};
-const std::vector<int64_t> BitboardTools::PAWN_DELTAS_2 = {7, 9};
+    const std::vector<int64_t>
+        KNIGHT_DELTAS = {17, 15, 10, 6, -17, -15, -10, -6};
+    const std::vector<int64_t> KING_DELTAS = {9, 8, 7, 1, -9, -8, -7, -1};
+    const std::vector<int64_t> PAWN_DELTAS_1 = {-7, -9};
+    const std::vector<int64_t> PAWN_DELTAS_2 = {7, 9};
 
-const std::vector<Bitboard> BitboardTools::BB_RANKS = {
-    BitboardTools::BB_RANK_1,
-    BitboardTools::BB_RANK_2,
-    BitboardTools::BB_RANK_3,
-    BitboardTools::BB_RANK_4,
-    BitboardTools::BB_RANK_5,
-    BitboardTools::BB_RANK_6,
-    BitboardTools::BB_RANK_7,
-    BitboardTools::BB_RANK_8};
-const std::vector<Bitboard> BitboardTools::BB_FILES = {
-    BitboardTools::BB_FILE_A,
-    BitboardTools::BB_FILE_B,
-    BitboardTools::BB_FILE_C,
-    BitboardTools::BB_FILE_D,
-    BitboardTools::BB_FILE_E,
-    BitboardTools::BB_FILE_F,
-    BitboardTools::BB_FILE_G,
-    BitboardTools::BB_FILE_H};
+    const std::vector<Bitboard> BB_RANKS = {
+        BB_RANK_1,
+        BB_RANK_2,
+        BB_RANK_3,
+        BB_RANK_4,
+        BB_RANK_5,
+        BB_RANK_6,
+        BB_RANK_7,
+        BB_RANK_8};
+    const std::vector<Bitboard> BB_FILES = {
+        BB_FILE_A,
+        BB_FILE_B,
+        BB_FILE_C,
+        BB_FILE_D,
+        BB_FILE_E,
+        BB_FILE_F,
+        BB_FILE_G,
+        BB_FILE_H};
+
+    void init_constants()
+    {
+        BB_KNIGHT_ATTACKS = build_attacks(KNIGHT_DELTAS);
+
+        BB_KING_ATTACKS = build_attacks(KING_DELTAS);
+
+        BB_PAWN_ATTACKS = build_attacks(PAWN_DELTAS_1);
+
+        std::vector<Bitboard> d = build_attacks(PAWN_DELTAS_2);
+        BB_PAWN_ATTACKS.insert(BB_PAWN_ATTACKS.end(), d.begin(), d.end());
+
+        auto diag_attack_table = _attack_table({-9, -7, 7, 9});
+        BB_DIAG_MASKS = std::get<0>(diag_attack_table);
+        BB_DIAG_ATTACKS = std::get<1>(diag_attack_table);
+
+        auto file_attack_table = _attack_table({-8, 8});
+        BB_FILE_MASKS = std::get<0>(file_attack_table);
+        BB_FILE_ATTACKS = std::get<1>(file_attack_table);
+
+        auto rank_attack_table = _attack_table({-1, 1});
+        BB_RANK_MASKS = std::get<0>(rank_attack_table);
+        BB_RANK_ATTACKS = std::get<1>(rank_attack_table);
+
+        BB_RAYS = _rays();
+    }
+}; // namespace BitboardTools

@@ -25,3 +25,11 @@ private:
         //
     }
 };
+
+namespace PieceTypeTools
+{
+    PieceType parse(char piece_char)
+    {
+        return PieceType::NONE;
+    }
+} // namespace PieceTypeTools
