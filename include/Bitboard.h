@@ -7,6 +7,7 @@
 
 typedef uint64_t Bitboard;
 
+#include "Bitboards.h"
 #include "Square.h"
 
 // https://en.cppreference.com/w/cpp/numeric/bit_width

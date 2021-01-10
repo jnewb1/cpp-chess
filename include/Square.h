@@ -54,4 +54,9 @@ namespace SquareTools
         return std::max(std::abs(file(a) - file(b)), std::abs(rank(a) - rank(b)));
     }
 
+    Square mirror(Square square)
+    {
+        return square ^ 0x38;
+    }
+
 }; // namespace SquareTools
