@@ -9,7 +9,8 @@
             "command": "cmake ..",
             "options": {
                 "cwd": "${workspaceFolder}/build"
-            }
+            },
+            "problemMatcher": []
         },
         {
             "label": "make",
@@ -17,7 +18,8 @@
             "command": "make",
             "options": {
                 "cwd": "${workspaceFolder}/build"
-            }
-        },
+            },
+            "problemMatcher": []
+        }
     ]
 }

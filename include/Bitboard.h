@@ -75,15 +75,32 @@ namespace BitboardTools
     const Bitboard BB_RANK_7 = (uint64_t)0xff << 48;
     const Bitboard BB_RANK_8 = (uint64_t)0xff << 52;
 
-    const std::vector<Bitboard> BB_FILES;
-    const std::vector<Bitboard> BB_RANKS;
-
     const Bitboard BB_BACKRANKS = BB_RANK_1 | BB_RANK_8;
 
-    const std::vector<int64_t> KNIGHT_DELTAS;
-    const std::vector<int64_t> KING_DELTAS;
-    const std::vector<int64_t> PAWN_DELTAS_1;
-    const std::vector<int64_t> PAWN_DELTAS_2;
+    const std::vector<int64_t>
+        KNIGHT_DELTAS = {17, 15, 10, 6, -17, -15, -10, -6};
+    const std::vector<int64_t> KING_DELTAS = {9, 8, 7, 1, -9, -8, -7, -1};
+    const std::vector<int64_t> PAWN_DELTAS_1 = {-7, -9};
+    const std::vector<int64_t> PAWN_DELTAS_2 = {7, 9};
+
+    const std::vector<Bitboard> BB_RANKS = {
+        BB_RANK_1,
+        BB_RANK_2,
+        BB_RANK_3,
+        BB_RANK_4,
+        BB_RANK_5,
+        BB_RANK_6,
+        BB_RANK_7,
+        BB_RANK_8};
+    const std::vector<Bitboard> BB_FILES = {
+        BB_FILE_A,
+        BB_FILE_B,
+        BB_FILE_C,
+        BB_FILE_D,
+        BB_FILE_E,
+        BB_FILE_F,
+        BB_FILE_G,
+        BB_FILE_H};
 
     std::vector<Bitboard> BB_DIAG_MASKS;
     std::vector<std::map<Bitboard, Bitboard>> BB_DIAG_ATTACKS;
@@ -257,31 +274,6 @@ namespace BitboardTools
         Bitboard bb = BB_RAYS[a][b] & ((BB_ALL << a) ^ (BB_ALL << b));
         return bb & (bb - 1);
     }
-
-    const std::vector<int64_t>
-        KNIGHT_DELTAS = {17, 15, 10, 6, -17, -15, -10, -6};
-    const std::vector<int64_t> KING_DELTAS = {9, 8, 7, 1, -9, -8, -7, -1};
-    const std::vector<int64_t> PAWN_DELTAS_1 = {-7, -9};
-    const std::vector<int64_t> PAWN_DELTAS_2 = {7, 9};
-
-    const std::vector<Bitboard> BB_RANKS = {
-        BB_RANK_1,
-        BB_RANK_2,
-        BB_RANK_3,
-        BB_RANK_4,
-        BB_RANK_5,
-        BB_RANK_6,
-        BB_RANK_7,
-        BB_RANK_8};
-    const std::vector<Bitboard> BB_FILES = {
-        BB_FILE_A,
-        BB_FILE_B,
-        BB_FILE_C,
-        BB_FILE_D,
-        BB_FILE_E,
-        BB_FILE_F,
-        BB_FILE_G,
-        BB_FILE_H};
 
     void init_constants()
     {

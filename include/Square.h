@@ -11,8 +11,12 @@ typedef uint64_t Square;
 
 namespace SquareTools
 {
-    const std::vector<char> FILE_NAMES;
-    const std::vector<char> RANK_NAMES;
+    const std::vector<char> FILE_NAMES = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+    const std::vector<char> RANK_NAMES = {'1', '2', '3', '4', '5', '6', '7', '8'};
+    Square square(int file_idx, int rank_idx)
+    {
+        return rank_idx * 8 + file_idx;
+    }
 
     Square parse(std::string name_)
     {
@@ -28,11 +32,6 @@ namespace SquareTools
         }
 
         throw std::exception();
-    }
-
-    Square square(int file_idx, int rank_idx)
-    {
-        return rank_idx * 8 + file_idx;
     }
 
     std::string name(Square square)
@@ -55,6 +54,4 @@ namespace SquareTools
         return std::max(std::abs(file(a) - file(b)), std::abs(rank(a) - rank(b)));
     }
 
-    const std::vector<char> FILE_NAMES = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-    const std::vector<char> RANK_NAMES = {'1', '2', '3', '4', '5', '6', '7', '8'};
 }; // namespace SquareTools
